@@ -1,2 +1,18 @@
 from pygame import *
-C:\Program Files\Algoritmika\vscode\data\extensions\algoritmika.algopython-20251111.203400.0\data\student\70231116\657891
+
+window = display.set_mode((500,500))
+background = transform.scale(image.load('media/images/galaxy.jpg'),window.get_size())
+window.blit(background,(0,0))
+
+
+
+
+flag = True
+clock = time.Clock()
+while flag:
+    display.update()
+    clock.tick()
+    events = event.get()
+    for i in events:
+        if i.type == QUIT:
+            flag = False
