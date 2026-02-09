@@ -12,8 +12,16 @@ class Character(sprite.Sprite):
         self.rect.y = y
     def draw(self):
         self.window.blit(self.image,(self.rect.x, self.rect.y))
+    
+class Bullet(Character):
+    def update(self):
+        self.rect.y -= self.speed
+        self.draw()
+        if self.rect.y < 0:
+            self.kill()
 
 class Player(Character):
+    bullets = sprite.Group()
     counter = 0
     def move(self):
         keys_pressed = key.get_pressed()
@@ -21,6 +29,12 @@ class Player(Character):
             self.rect.x -= self.speed
         if keys_pressed[K_RIGHT] and self.rect.x < self.window.get_size()[0] - self.rect.width:
             self.rect.x += self.speed
+    def fire(self):
+        keys_pressed = key.get_pressed()
+        if keys_pressed[K_SPACE]:
+            bullet = Bullet(self.rect.centerx,self.rect.y,'media/images/bullet.png',10,15,2,self.window)
+            self.bullets.add(bullet)
+
 
 class Enemy(Character):
     def update(self):

@@ -35,6 +35,8 @@ while flag:
     window.blit(background,(0,0))
     player.draw()
     player.move()
+    player.fire()
+    player.bullets.update()
     enemies.update()
     text = text_font.render('Пропущено:' + str(player.counter),True,(235, 52, 52))
     window.blit(text,(50,50))
