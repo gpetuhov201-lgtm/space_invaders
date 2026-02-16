@@ -34,16 +34,20 @@ class Player(Character):
         if keys_pressed[K_SPACE]:
             bullet = Bullet(self.rect.centerx,self.rect.y,'media/images/bullet.png',10,15,2,self.window)
             self.bullets.add(bullet)
+            return False
+        return True
 
 
 class Enemy(Character):
+    player = None
     def update(self):
         self.draw()
         if self.rect.y < self.window.get_size()[1] - self.rect.height:
             self.rect.y += self.speed
         else:
             self.rect.y = randint(-200,0)
-            self.player.counter += 1
+            if self.player:
+                self.player.counter += 1
             self.speed = randint(1,3)
     def count(self,player):
         self.player = player
