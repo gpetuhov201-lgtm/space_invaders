@@ -29,9 +29,10 @@ class Player(Character):
             self.rect.x -= self.speed
         if keys_pressed[K_RIGHT] and self.rect.x < self.window.get_size()[0] - self.rect.width:
             self.rect.x += self.speed
-    def fire(self):
+    def fire(self,f_sound):
         keys_pressed = key.get_pressed()
         if keys_pressed[K_SPACE]:
+            f_sound.play()
             bullet = Bullet(self.rect.centerx,self.rect.y,'media/images/bullet.png',10,15,2,self.window)
             self.bullets.add(bullet)
             return False
@@ -51,3 +52,10 @@ class Enemy(Character):
             self.speed = randint(1,3)
     def count(self,player):
         self.player = player
+
+
+class Button(Character):
+    def check(self):
+        mouse_pressed = mouse.get_pressed()
+        if mouse_pressed[0]:
+            return self.rect.collidepoint(mouse.get_pos()[0],mouse.get_pos()[1])
